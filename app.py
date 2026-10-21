@@ -473,3 +473,12 @@ st.markdown("""
 
 st.divider()
 st.caption("Source: Eurostat (hlth_hlye).")
+st.subheader("About the author")
+
+st.write("Farida Bedewy")
+st.caption("I2-BIO | EFREI Paris")
+
+st.markdown(
+    "[Email](mail: farida.bedewy@efrei.net) | "
+    "[GitHub](https://github.com/faridabed/living-longer-dashboard)"
+)
