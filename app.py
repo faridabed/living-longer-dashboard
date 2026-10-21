@@ -303,9 +303,10 @@ with trend_tab:
             )
         else:
             st.write("The gap remained stable over this period.")
-    else:
+    else: 
         st.caption("Not enough data to compare the gap over time.")
-        st.caption(
+
+    st.caption(
         "The gap represents the difference between life expectancy "
         "and healthy life years at birth. It does not necessarily "
         "represent consecutive years of illness."
@@ -469,7 +470,13 @@ with gender_tab:
         values="value"
     )
 
-    if gender_values.notna().all().all() and len(gender_values) == 2:
+    if (
+        "Female" in gender_values.index
+        and "Male" in gender_values.index
+        and "Life expectancy" in gender_values.columns
+        and "Healthy life years" in gender_values.columns
+        and gender_values.notna().all().all()
+        ):
         life_gap = (
             gender_values.loc["Female", "Life expectancy"]
             - gender_values.loc["Male", "Life expectancy"]
@@ -512,7 +519,7 @@ with quality_tab:
     st.markdown("**Indicator validation**")
     checks = data.groupby("indicator")["value"].agg(["count", "min", "max", "mean"]).round(2)
     st.dataframe(checks, use_container_width=True)
-    bad_percentage = data[(data["indicator"] == "HLY_LE_Y0_PC") & (~data["value"].between(0, 100))]
+    bad_percentage = data[(data["indicator"] == "HLY_LE_Y0_PC") &(data["value"].notna()) &(~data["value"].between(0, 100))]
     bad_years = data[(data["indicator"].isin(["LE_Y0", "HLY_Y0"])) & (data["value"] < 0)]
     st.write("Out-of-range observations:", len(bad_percentage) + len(bad_years))
 
