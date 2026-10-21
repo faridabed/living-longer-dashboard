@@ -233,6 +233,84 @@ with trend_tab:
             st.caption("At least two comparable years are needed to calculate change.")
     st.caption("Provisional data and changes in methodology may affect comparisons over time.")
 
+    
+    st.divider()
+    st.subheader("The gap between life expectancy and healthy life years")
+
+    st.write(
+        "How has the gap between life expectancy and healthy life years "
+        "changed over time?"
+    )
+
+    # Separate the two indicators
+    life_data = trend[trend["indicator"] == "LE_Y0"]
+    healthy_data = trend[trend["indicator"] == "HLY_Y0"]
+
+    # Combine the indicators by year
+    gap_data = pd.merge(
+        life_data[["year", "value"]],
+        healthy_data[["year", "value"]],
+        on="year",
+        suffixes=("_life", "_healthy")
+    )
+
+    # Calculate the gap
+    gap_data["gap"] = (
+        gap_data["value_life"] - gap_data["value_healthy"]
+    )
+
+    # Create the line chart
+    fig_gap = px.line(
+        gap_data,
+        x="year",
+        y="gap",
+        markers=True,
+        labels={
+            "year": "Year",
+            "gap": "Difference (years)"
+        }
+    )
+
+    fig_gap.update_traces(line_color="#487FA5")
+    fig_gap.update_layout(height=400)
+
+    st.plotly_chart(fig_gap, use_container_width=True)
+    
+    # Interpret the gap over time
+    if len(gap_data) >= 2:
+        gap_data = gap_data.sort_values("year")
+
+        first_gap = gap_data.iloc[0]["gap"]
+        last_gap = gap_data.iloc[-1]["gap"]
+
+        gap_change = last_gap - first_gap
+
+        st.write(
+            f"Between {int(gap_data.iloc[0]['year'])} and "
+            f"{int(gap_data.iloc[-1]['year'])}, "
+            f"the gap changed by {gap_change:+.1f} years."
+        )
+
+        if gap_change > 0:
+            st.write(
+                "The gap increased, meaning that life expectancy "
+                "grew more than healthy life years."
+            )
+        elif gap_change < 0:
+            st.write(
+                "The gap decreased, meaning that healthy life years "
+                "grew more than life expectancy."
+            )
+        else:
+            st.write("The gap remained stable over this period.")
+    else:
+        st.caption("Not enough data to compare the gap over time.")
+        st.caption(
+        "The gap represents the difference between life expectancy "
+        "and healthy life years at birth. It does not necessarily "
+        "represent consecutive years of illness."
+    )
+
 with comparison_tab:
     st.subheader("Comparison between countries")
     comparison = countries_data[
