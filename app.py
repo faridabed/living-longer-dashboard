@@ -473,12 +473,16 @@ st.markdown("""
 
 st.divider()
 st.caption("Source: Eurostat (hlth_hlye).")
-st.subheader("About the author")
+st.divider()
 
-st.write("Farida Bedewy")
-st.caption("I2-BIO | EFREI Paris")
+col1, col2 = st.columns([3, 1])
 
-st.markdown(
-    "[Email](mail: farida.bedewy@efrei.net) | "
-    "[GitHub](https://github.com/faridabed/living-longer-dashboard)"
-)
+with col1:
+    st.markdown("**Farida Bedewy**")
+    st.caption("I2-BIO · EFREI Paris")
+
+with col2:
+    st.markdown(
+        "[Email](mailto:farida.bedewy@efrei.net)  |  "
+        "[GitHub](https://github.com/faridabed/living-longer-dashboard)"
+    )
