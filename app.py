@@ -70,23 +70,25 @@ raw, data = load_data()
 st.title("Living Longer, But Living Better?")
 st.caption("Healthy life expectancy in Europe, 2004–2024")
 
+
 st.markdown("""
 <div style="
     padding: 1.2rem 1.4rem;
-    border-radius: 14px;
-    border: 1px solid rgba(77, 133, 173, 0.45);
-    background-color: rgba(77, 133, 173, 0.10);
+    border-radius: 12px;
+    border: 1px solid #A8C9D8;
+    background-color: #EAF2F7;
     margin-top: 1rem;
     margin-bottom: 1rem;
 ">
-    <p style="margin: 0; font-size: 0.95rem; color: #BFC7D5;">
+    <p style="margin: 0; font-size: 0.95rem; color: #526579;">
         Research question
     </p>
-    <p style="margin: 0.35rem 0 0 0; font-size: 1.35rem; font-weight: 700; color: white;">
+    <p style="margin: 0.4rem 0 0 0; font-size: 1.3rem; font-weight: 600; color: #243B53;">
         Are Europeans living longer, or are they living healthier?
     </p>
 </div>
 """, unsafe_allow_html=True)
+
 
 st.write(
     "This dashboard explores life expectancy and healthy life years "
@@ -450,22 +452,24 @@ with quality_tab:
 # General conclusion
 st.subheader("Conclusion")
 
+
 st.markdown("""
 <div style="
     padding: 1rem 1.2rem;
     border-radius: 12px;
-    border: 1px solid rgba(112, 166, 159, 0.35);
-    background-color: rgba(112, 166, 159, 0.08);
+    border: 1px solid #B7D5D0;
+    background-color: #EFF6F4;
 ">
-    <p style="margin: 0 0 0.6rem 0; font-weight: 600; color: white;">
+    <p style="margin: 0 0 0.6rem 0; font-weight: 600; color: #315C58;">
         Main takeaway
     </p>
-    <p style="margin: 0; color: #E5E7EB;">
+    <p style="margin: 0; color: #243B53;">
         The results show that living longer does not always mean living healthier.
         Life expectancy and healthy life years do not always increase at the same rate,
         and differences can also be observed between countries and between women and men.
     </p>
 </div>
 """, unsafe_allow_html=True)
+
 st.divider()
 st.caption("Source: Eurostat (hlth_hlye).")
