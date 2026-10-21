@@ -4,6 +4,40 @@ import streamlit as st
 
 st.set_page_config(page_title="Living Longer, But Living Better?", layout="wide")
 
+st.markdown("""
+<style>
+/* Main block spacing */
+.block-container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* Tabs */
+div[data-baseweb="tab-list"] {
+    gap: 8px;
+}
+
+button[data-baseweb="tab"] {
+    border-radius: 10px 10px 0 0;
+    padding: 10px 18px;
+    background-color: rgba(255,255,255,0.03);
+}
+
+button[data-baseweb="tab"][aria-selected="true"] {
+    background-color: rgba(77, 133, 173, 0.15);
+    border-bottom: 2px solid #4D85AD;
+}
+
+/* Metric cards */
+div[data-testid="stMetric"] {
+    background-color: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 12px;
+    border-radius: 12px;
+}
+</style>
+""", unsafe_allow_html=True)
+
 # 1. Load and prepare Eurostat data
 @st.cache_data
 def load_data():
@@ -36,8 +70,23 @@ raw, data = load_data()
 st.title("Living Longer, But Living Better?")
 st.caption("Healthy life expectancy in Europe, 2004–2024")
 
-st.markdown("### Research question")
-st.markdown("**Are Europeans living longer, or are they living healthier?**")
+st.markdown("""
+<div style="
+    padding: 1.2rem 1.4rem;
+    border-radius: 14px;
+    border: 1px solid rgba(77, 133, 173, 0.45);
+    background-color: rgba(77, 133, 173, 0.10);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+">
+    <p style="margin: 0; font-size: 0.95rem; color: #BFC7D5;">
+        Research question
+    </p>
+    <p style="margin: 0.35rem 0 0 0; font-size: 1.35rem; font-weight: 700; color: white;">
+        Are Europeans living longer, or are they living healthier?
+    </p>
+</div>
+""", unsafe_allow_html=True)
 
 st.write(
     "This dashboard explores life expectancy and healthy life years "
@@ -45,7 +94,6 @@ st.write(
 )
 
 st.caption("Source: Eurostat — Healthy life years by sex (hlth_hlye).")
-
 st.divider()
 
 
@@ -402,20 +450,22 @@ with quality_tab:
 # General conclusion
 st.subheader("Conclusion")
 
-st.write(
-    "The results show that living longer does not always "
-    "mean living healthier."
-)
-
-st.write(
-    "Life expectancy and healthy life years do not always "
-    "increase at the same rate. We can also observe differences "
-    "between European countries and between women and men."
-)
-
-st.write(
-    "This shows why it is important to consider both indicators "
-    "when studying population health."
-)
+st.markdown("""
+<div style="
+    padding: 1rem 1.2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(112, 166, 159, 0.35);
+    background-color: rgba(112, 166, 159, 0.08);
+">
+    <p style="margin: 0 0 0.6rem 0; font-weight: 600; color: white;">
+        Main takeaway
+    </p>
+    <p style="margin: 0; color: #E5E7EB;">
+        The results show that living longer does not always mean living healthier.
+        Life expectancy and healthy life years do not always increase at the same rate,
+        and differences can also be observed between countries and between women and men.
+    </p>
+</div>
+""", unsafe_allow_html=True)
 st.divider()
 st.caption("Source: Eurostat (hlth_hlye).")
