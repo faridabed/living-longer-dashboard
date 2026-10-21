@@ -475,14 +475,12 @@ st.divider()
 st.caption("Source: Eurostat (hlth_hlye).")
 st.divider()
 
-col1, col2 = st.columns([3, 1])
+col1, col2 = st.columns([2, 3])
 
 with col1:
     st.markdown("**Farida Bedewy**")
     st.caption("I2-BIO · EFREI Paris")
 
 with col2:
-    st.markdown(
-        "[Email](mailto:farida.bedewy@efrei.net)  |  "
-        "[GitHub](https://github.com/faridabed/living-longer-dashboard)"
-    )
+    st.write("Email: farida.bedewy@efrei.net")
+    st.write("GitHub: github.com/faridabed/living-longer-dashboard")
